@@ -1,8 +1,5 @@
 /*
- * main.cpp
- *
- *  Created on: 22 Jan 2014
- *      Author: Dennis
+ * @author Dennis Merkus
  */
 #include <iostream>
 
@@ -11,5 +8,3 @@ int main( int argc, char *argv[] ) {
 
 	return 0;
 }
-
-
