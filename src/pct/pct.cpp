@@ -13,6 +13,8 @@ using std::endl;
 namespace pct {
 
 void PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
+	Options opts = Options();
+
 	// parse all arguments
 	for( int i = 2; i < argc; i++ ) {
 		// TODO make simple argument parser with names, name:value
@@ -26,12 +28,18 @@ void PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 			string value = p.substr(pos + 1);
 
 			// Create the Option
+			char* p;
+			long number = strtol( value.c_str(), &p, 10 );
+			if(*p) {
+				// The value was not a number
+			}
+			else {
+				opts.addOption( NumberOption( name, number ) );
+			}
 		}
 		else {
 			cout << "The parameter " << p << " was not properly structured." << endl;
 		}
-
-
 	}
 }
 

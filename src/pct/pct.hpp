@@ -10,6 +10,9 @@
 
 #include <string>
 
+#include "option.hpp"
+#include "result.hpp"
+
 using std::string;
 
 namespace pct {
@@ -21,59 +24,6 @@ public:
 	void parseCommand( int argc, char* argv[] );
 
 	Results useTool( string name, Options opts );
-};
-
-class Option {
-
-};
-
-class Options {
-
-};
-
-class Result {
-private:
-	string name;
-};
-
-class IntResult {
-
-};
-
-class Results {
-
-};
-
-class Module {
-public:
-	virtual Results run( Options opts ) = 0;
-};
-
-class FileInputModule : public Module {
-
-};
-
-class FileOutputModule : public Module {
-
-};
-
-class AlgorithmAnalysisTool : public Tool {
-private:
-	AlgorithmAnalysisTool() {
-		name = "analysis";
-	}
-};
-
-/**
- * Interface for algorithms.
- *
- * Provides a uniform way to access algorithms.
- * This includes several types of algorithms.
- */
-class AlgorithmWrapper {
-private:
-public:
-	virtual Results call() = 0;
 };
 
 }
