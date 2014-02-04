@@ -6,13 +6,17 @@
  */
 #include "pct.hpp"
 
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
 using std::string;
 using std::cout;
 using std::endl;
 
 namespace pct {
 
-void PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
+Options PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 	Options opts = Options();
 
 	// parse all arguments
@@ -41,6 +45,8 @@ void PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 			cout << "The parameter " << p << " was not properly structured." << endl;
 		}
 	}
+
+	return opts;
 }
 
 Results PredictiveCodingToolbox::useTool( string name, Options opts ) {

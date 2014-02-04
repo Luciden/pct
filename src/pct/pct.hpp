@@ -19,9 +19,7 @@ namespace pct {
 
 class PredictiveCodingToolbox {
 public:
-	PredictiveCodingToolbox();
-
-	void parseCommand( int argc, char* argv[] );
+	Options parseCommand( int argc, char* argv[] );
 
 	Results useTool( string name, Options opts );
 };

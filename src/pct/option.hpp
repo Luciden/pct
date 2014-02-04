@@ -23,7 +23,7 @@ enum OptionType {
 };
 
 class Option {
-private:
+protected:
 	string name;
 	OptionType type;
 

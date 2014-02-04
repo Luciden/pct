@@ -8,7 +8,7 @@
 #define NETWORK_HPP_
 
 #include <map>
-#include "smile.h"
+#include "../libSMILE/smile.h"
 
 using std::string;
 using std::vector;

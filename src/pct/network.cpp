@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include "../libSMILE/smile.h"
+
 using std::cout;
 using std::endl;
 

@@ -24,18 +24,6 @@ OptionType Option::getType() {
 
 Options::Options() {
 	options = vector<Option>();
-	last = NULL;
-}
-
-Option Options::findOption( string name ) {
-	for( vector<Option>::iterator it = options.begin();
-			 it != options.end(); ++it ) {
-			if( it->getName() == name ) {
-				return *it;
-			}
-		}
-
-		return NULL;
 }
 
 void Options::addOption( Option option ) {
@@ -44,22 +32,28 @@ void Options::addOption( Option option ) {
 }
 
 bool Options::contains( string name ) {
-	Option opt = findOption( name );
-	if( opt != NULL ) {
-		last = opt;
-		return true;
+	for( vector<Option>::iterator it = options.begin();
+		 it != options.end(); ++it ) {
+		if( it->getName() == name ) {
+			last = *it;
+			return true;
+		}
 	}
-	else {
-		return false;
-	}
+
+	return false;
 }
 
 Option Options::getOption( string name ) {
-	if( last != NULL && last.getName() == name ) {
+	if( last.getName() == name ) {
 		return last;
 	}
 	else {
-		return findOption( name );
+		if( this->contains(name) ) {
+			return last;
+		}
+		else {
+			// throw exception
+		}
 	}
 }
 

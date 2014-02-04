@@ -3,7 +3,7 @@
  */
 #include <iostream>
 
-#include "pct.hpp"
+#include "pct/pct.hpp"
 
 using namespace pct;
 
