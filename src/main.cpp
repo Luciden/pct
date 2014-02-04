@@ -18,8 +18,6 @@ void description() {
 }
 
 int main( int argc, char *argv[] ) {
-	description();
-
 	PredictiveCodingToolbox tb = PredictiveCodingToolbox();
 
 	// read command line parameters and decide what to do
@@ -30,21 +28,20 @@ int main( int argc, char *argv[] ) {
 	}
 	else {
 		string command = argv[1];
-		Options opts = tb.parseCommand( argc, argv );
 
-		if( command == "help" ) {
-			cout << "Possible : " << endl
+		if( command == "about" ) {
+			description();
+		}
+		else if( command == "help" ) {
+			cout << "Possible commands: " << endl
+				 << "about" << "\t\t information about this toolbox" << endl
+				 << "help" << "\t\t this help" << endl
 			     << "analysis" << endl
 			     << "inference" << endl;
 		}
-		else if( command == "analysis" ) {
-			tb.useTool( command, opts );
-		}
-		else if( command == "inference" ) {
-
-		}
 		else {
-			cout << "Invalid command \"" << argv[1] << "\"" << endl;
+			Options opts = tb.parseCommand( argc, argv );
+			tb.useTool( command, opts );
 		}
 	}
 

@@ -50,7 +50,9 @@ Options PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 }
 
 Results PredictiveCodingToolbox::useTool( string name, Options opts ) {
+	cout << "using the " << name << " tool." << endl;
 	// Check if tool exists
+
 
 	// Check if required options are available
 

@@ -9,7 +9,12 @@
 #define TOOL_HPP_
 
 #include <string>
+#include <vector>
 
+#include "../result.hpp"
+#include "../option.hpp"
+
+using std::vector;
 using std::string;
 
 namespace pct {
@@ -17,11 +22,19 @@ namespace pct {
 class Tool {
 protected:
 	string name;
-	string usage;
 	string description;
+
+	vector<string> required;
+	vector<string> optional;
 
 public:
 	virtual Results run( Options opts ) = 0;
+
+	string getName();
+	
+	string getDescription();
+
+	string getUsage();
 };
 
 }

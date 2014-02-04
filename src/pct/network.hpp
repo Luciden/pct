@@ -8,7 +8,7 @@
 #define NETWORK_HPP_
 
 #include <map>
-#include "../libSMILE/smile.h"
+#include "smile.h"
 
 using std::string;
 using std::vector;
@@ -38,6 +38,7 @@ private:
 
 public:
 	SMILEBayesianNetwork();
+	SMILEBayesianNetwork( DSL_network network );
 
 	virtual void addNode( string name, vector<string> values );
 	virtual void addDependency( string from, string to );
