@@ -6,6 +6,8 @@
  */
 #include "network.hpp"
 
+#include <iostream>
+
 using std::cout;
 using std::endl;
 
@@ -13,6 +15,7 @@ namespace pct {
 
 SMILEBayesianNetwork::SMILEBayesianNetwork() {
 	net = DSL_network();
+	nodes = map<string, int>();
 }
 
 void SMILEBayesianNetwork::addNode( string name, vector<string> values ) {
