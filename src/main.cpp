@@ -14,7 +14,7 @@ using std::string;
 
 void description() {
 	cout << "Predictive Coding Toolbox by Dennis Merkus (dennis.merkus@gmail.com)" << endl;
-	cout << "This toolbox uses the SMILE library (provided on an \"as is\" basis)." << endl;
+	cout << "This toolbox uses the SMILE library (provided on an \"as is\" basis). Available at http://genie.sis.pitt.edu/" << endl;
 }
 
 int main( int argc, char *argv[] ) {
