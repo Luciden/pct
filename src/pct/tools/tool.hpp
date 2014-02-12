@@ -11,8 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "../result.hpp"
-#include "../option.hpp"
+#include "../infoset.hpp"
 
 using std::vector;
 using std::string;
@@ -28,7 +27,7 @@ protected:
 	vector<string> optional;
 
 public:
-	virtual Results run( Options opts ) = 0;
+	virtual InfoSet run( InfoSet options ) = 0;
 
 	string getName();
 	

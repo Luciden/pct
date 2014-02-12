@@ -10,8 +10,7 @@
 
 #include <string>
 
-#include "option.hpp"
-#include "result.hpp"
+#include "infoset.hpp"
 
 using std::string;
 
@@ -22,9 +21,9 @@ public:
 	/**
 	 * 
 	 */
-	Options parseCommand( int argc, char* argv[] );
+	InfoSet parseCommand( int argc, char* argv[] );
 
-	Results useTool( string name, Options opts );
+	InfoSet useTool( string name, InfoSet opts );
 };
 
 }

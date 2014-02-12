@@ -40,8 +40,8 @@ int main( int argc, char *argv[] ) {
 			     << "inference" << endl;
 		}
 		else {
-			Options opts = tb.parseCommand( argc, argv );
-			tb.useTool( command, opts );
+			InfoSet options = tb.parseCommand( argc, argv );
+			tb.useTool( command, options );
 		}
 	}
 

@@ -5,6 +5,7 @@
  *      Author: Dennis
  */
 #include "pct.hpp"
+#include "infoset.hpp"
 
 #include <iostream>
 #include <string>
@@ -16,8 +17,8 @@ using std::endl;
 
 namespace pct {
 
-Options PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
-	Options opts = Options();
+InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
+	InfoSet opts = InfoSet();
 
 	// parse all arguments
 	for( int i = 2; i < argc; i++ ) {
@@ -38,7 +39,7 @@ Options PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 				// The value was not a number
 			}
 			else {
-				opts.addOption( NumberOption( name, number ) );
+				opts.addInfo( Info( name, number ) );
 			}
 		}
 		else {
@@ -49,7 +50,7 @@ Options PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 	return opts;
 }
 
-Results PredictiveCodingToolbox::useTool( string name, Options opts ) {
+InfoSet PredictiveCodingToolbox::useTool( string name, InfoSet opts ) {
 	cout << "using the " << name << " tool." << endl;
 	// Check if tool exists
 
@@ -57,7 +58,7 @@ Results PredictiveCodingToolbox::useTool( string name, Options opts ) {
 	// Check if required options are available
 
 	// Run tool
-	Results results = Results();
+	InfoSet results = InfoSet();
 
 	// Give results
 	return results;
