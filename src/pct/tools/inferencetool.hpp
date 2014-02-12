@@ -15,6 +15,8 @@ class InferenceTool : public Tool {
 private:
 
 public:
+	InferenceTool();
+
 	virtual InfoSet run( InfoSet options );
 };
 

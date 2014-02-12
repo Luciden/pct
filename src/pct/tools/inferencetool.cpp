@@ -1,8 +1,12 @@
 #include "inferencetool.hpp"
 
 #include <tuple>
+#include <iostream>
 
 #include "../infoset.hpp"
+#include "../network.hpp"
+
+#include "../modules/fileinputmodule.hpp"
 
 using std::tuple;
 
@@ -15,12 +19,28 @@ InferenceTool::InferenceTool() {
 	required = OptionList();
 	optional = OptionList();
 
-	required.push_back( Option( "file", Info::String ) );
-	required.push_back( Option( "dist", Info::String ) );
+	required.push_back( Option( "filename", Info::String ) );
+	required.push_back( Option( "query", Info::String ) );
+	required.push_back( Option( "algorithm", Info::String ) );
 }
 
-InfoSet run( InfoSet options ) {
+InfoSet InferenceTool::run( InfoSet options ) {
+	InfoSet results = InfoSet();
 
+	if( checkOptions( options ) ) {
+		// Load a network from a file
+		SMILEBayesianNetwork network = FileInputModule::load( options.getInfo("file").getStringValue() );
+
+		// Run inference algorithm
+
+		// Give results
+
+	}
+	else {
+		std::cout << "Some options are not specified" << std::endl;
+	}
+
+	return results;
 }
 
 }

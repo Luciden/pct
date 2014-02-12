@@ -11,11 +11,16 @@ namespace pct {
 
 InfoSet::InfoSet() {
 	infos = vector<Info>();
+	flags = vector<string>();
 }
 
 void InfoSet::addInfo( Info info ) {
 	//TODO: add existing check
 	infos.push_back( info );
+}
+
+void InfoSet::setFlag( string name ) {
+	flags.push_back( name );
 }
 
 bool InfoSet::contains( string name ) {
@@ -27,6 +32,17 @@ bool InfoSet::contains( string name ) {
 		}
 	}
 
+	return false;
+}
+
+bool InfoSet::isSet( string name ) {
+	for( vector<string>::iterator it = flags.begin();
+		 it != flags.end();
+		 it++ ) {
+		if( (*it) == name )
+			return true;
+	}
+	
 	return false;
 }
 

@@ -1,8 +1,4 @@
-/*
- * network.hpp
- *
- *  Created on: 26 Jan 2014
- *      Author: Dennis
+/** @file network.hpp
  */
 #ifndef NETWORK_HPP_
 #define NETWORK_HPP_
@@ -34,7 +30,7 @@ public:
 class SMILEBayesianNetwork : public BayesianNetwork {
 private:
 	DSL_network net;
-	map<string, int> nodes;
+	map<string, int> nodes; /**< map node names to their indexes in the DSL_network */
 
 public:
 	SMILEBayesianNetwork();

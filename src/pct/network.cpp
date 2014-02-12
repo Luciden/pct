@@ -20,6 +20,13 @@ SMILEBayesianNetwork::SMILEBayesianNetwork() {
 	nodes = map<string, int>();
 }
 
+SMILEBayesianNetwork::SMILEBayesianNetwork( DSL_network network ) {
+	net = network;
+
+	// make sure the names are mapped to the indexes (?)
+	nodes = map<string, int>();
+}
+
 void SMILEBayesianNetwork::addNode( string name, vector<string> values ) {
 	// Create the node and get the reference to it
 	int node = net.AddNode( DSL_CPT, name.c_str() );
@@ -37,7 +44,7 @@ void SMILEBayesianNetwork::addNode( string name, vector<string> values ) {
 void SMILEBayesianNetwork::addDependency( string from, string to ) {
 	// Check if nodes exist
 	if( nodes.find(from) == nodes.end() || nodes.find(to) == nodes.end() ) {
-		cout << from << " or " << to << " do not exist." << endl;
+		cout << from << " or " << to << " does not exist." << endl;
 		return;
 	}
 

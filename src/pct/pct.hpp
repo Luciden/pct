@@ -1,8 +1,5 @@
 /** @file pct.hpp
  *
- *
- *  Created on: 26 Jan 2014
- * @author Dennis Merkus
  */
 
 #ifndef PCT_HPP_
@@ -16,6 +13,11 @@ using std::string;
 
 namespace pct {
 
+/** Main class for the Predictive Coding Toolbox.
+ *
+ * This class links all the parts in the toolbox together.
+ * It is also responsible for parsing the command line.
+ */
 class PredictiveCodingToolbox {
 public:
 	/**

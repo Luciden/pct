@@ -1,5 +1,3 @@
 .cproject
 .project
-Debug/
-Release/
-/Release
+doc/
