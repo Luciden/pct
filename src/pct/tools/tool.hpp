@@ -34,6 +34,8 @@ protected:
 	OptionList required;
 	OptionList optional;
 
+	bool checkOptions( InfoSet options );
+
 public:
 	virtual InfoSet run( InfoSet options ) = 0;
 

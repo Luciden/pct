@@ -10,6 +10,17 @@ string Tool::getDescription() {
 	return description;
 }
 
+bool Tool::checkOptions( InfoSet options ) {
+	for( OptionList::iterator it = required.begin();
+		 it != required.end();
+		 ++it ) {
+		if( !options.contains( std::get<0>(*it) ) )
+			return false;
+	}
+
+	return true;
+}
+
 string Tool::makeOptionUsage( string optName, Info::Type optType ) {
 	string result = "-";
 
