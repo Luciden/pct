@@ -1,11 +1,13 @@
 #include "infoset.hpp"
 #include "info.hpp"
 
+#include <iostream>
 #include <vector>
 #include <string>
 
 using std::vector;
 using std::string;
+using std::to_string;
 
 namespace pct {
 
@@ -58,6 +60,33 @@ Info InfoSet::getInfo( string name ) {
 			// throw exception
 		}
 	}
+}
+
+string InfoSet::display() {
+	string render = "";
+
+	for( vector<Info>::iterator it = infos.begin();
+		 it != infos.end();
+		 ++it ) {
+		string name = it->getName();
+
+		Info::Type type = it->getType();
+		switch(type) {
+		case Info::Integer:
+			render += "[i] " + name + " " + to_string( static_cast<long long>(it->getIntValue() ) );
+			break;
+		case Info::Double:
+			render += "[d] " + name + " " + to_string( static_cast<long double>(it->getDoubleValue()) );
+			break;
+		case Info::String:
+			render += "[s] " + name + " " + it->getStringValue();
+			break;
+		}
+
+		render += "\n";
+	}
+
+	return render;
 }
 
 }

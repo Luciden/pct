@@ -33,11 +33,14 @@ InfoSet InferenceTool::run( InfoSet options ) {
 
 		// Run inference algorithm
 
+
 		// Give results
+
 
 	}
 	else {
 		std::cout << "Some options are not specified" << std::endl;
+		std::cout << getUsage() << std::endl;
 	}
 
 	return results;

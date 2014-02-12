@@ -1,8 +1,5 @@
 /*
  * pct.cpp
- *
- *  Created on: 27 Jan 2014
- *      Author: Dennis
  */
 #include "pct.hpp"
 
@@ -45,30 +42,49 @@ void PredictiveCodingToolbox::run( string command, InfoSet options ) {
 InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 	InfoSet opts = InfoSet();
 
+	bool readName = false;
+	string prevName = "";
+
 	// parse all arguments
 	for( int i = 2; i < argc; i++ ) {
 		// TODO make simple argument parser with names, name:value
 		// this is dependent on the tool used.
 		string p = argv[i];
 
-		// Find if it is properly structured and split the name and value
-		string::size_type pos = p.find(":");
-		if( pos != string::npos ) {
-			string name = p.substr(0, pos);
-			string value = p.substr(pos + 1);
+		if( !readName ) {
+			// parse a name
+			if( p[0] != '-' ) {
+				cout << "Parameters not structured properly." << endl;
+				cout << "Name expected instead of " << p << endl;
 
-			// Create the Option
-			char* p;
-			long number = strtol( value.c_str(), &p, 10 );
-			if(*p) {
-				// The value was not a number
+				break;
 			}
 			else {
-				opts.addInfo( Info( name, number ) );
+				prevName = p.substr(1);
+				readName = true;
 			}
 		}
 		else {
-			cout << "The parameter " << p << " was not properly structured." << endl;
+			// Read either an int, a double or a string
+			char* null;
+			long l = strtol( p.c_str(), &null, 10 );
+			
+
+			if(l != 0L ) {
+				opts.addInfo( Info( prevName, l ) );
+			}
+			else {
+				double d = strtod( p.c_str(), &null );
+
+				if( l != 0.0 ) {
+					opts.addInfo( Info( prevName, d ) );
+				}
+				else {
+					opts.addInfo( Info( prevName, p ) );
+				}
+			}
+
+			readName = false;
 		}
 	}
 
@@ -76,17 +92,20 @@ InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 }
 
 InfoSet PredictiveCodingToolbox::useTool( string name, InfoSet opts ) {
-	cout << "using the " << name << " tool." << endl;
-	// Check if tool exists
+	cout << opts.display() << endl;
 
+	// Check if tool exists and run it
+	for( vector<Tool*>::iterator it = tools.begin();
+		 it != tools.end();
+		 ++it ) {
+		if( (*it)->getName() == name ) {
+			return (*it)->run( opts );
+		}
+	}
 
-	// Check if required options are available
+	cout << "The " + name + " tool was not found!" << endl;
 
-	// Run tool
-	InfoSet results = InfoSet();
-
-	// Give results
-	return results;
+	return InfoSet();
 }
 
 void PredictiveCodingToolbox::list() {

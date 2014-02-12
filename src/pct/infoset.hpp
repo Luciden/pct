@@ -11,6 +11,11 @@ using std::vector;
 
 namespace pct {
 
+/**
+ * Provides labeled information.
+ *
+ * Can be used both to specify parameters or to give results.
+ */
 class InfoSet {
 private:
 	vector<Info> infos; /**< Information that is known */
@@ -51,6 +56,11 @@ public:
 	 * Get the piece of information with the specified name.
 	 */
 	Info getInfo( string name );
+
+	/**
+	 * Create a visual representation of all the current information.
+	 */
+	string display();
 };
 
 }
