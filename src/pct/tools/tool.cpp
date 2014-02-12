@@ -1,5 +1,7 @@
 #include "tool.hpp"
 
+#include <iostream>
+
 namespace pct {
 
 string Tool::getName() {

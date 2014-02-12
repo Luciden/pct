@@ -5,7 +5,6 @@
  *      Author: Dennis
  */
 #include "pct.hpp"
-#include "infoset.hpp"
 
 #include <iostream>
 #include <string>
@@ -15,7 +14,33 @@ using std::string;
 using std::cout;
 using std::endl;
 
+#include "infoset.hpp"
+
+#include "tools/tool.hpp"
+#include "tools/inferencetool.hpp"
+
 namespace pct {
+
+PredictiveCodingToolbox::PredictiveCodingToolbox() {
+	tools = vector<Tool*>();
+
+	tools.push_back( new InferenceTool() );
+}
+
+void PredictiveCodingToolbox::run( string command, InfoSet options ) {
+	if( command == "about" ) {
+		about();
+	}
+	else if( command == "help" ) {
+		help();
+	}
+	else if( command == "list" ) {
+		list();
+	}
+	else {
+		useTool( command, options );
+	}
+}
 
 InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 	InfoSet opts = InfoSet();
@@ -62,6 +87,31 @@ InfoSet PredictiveCodingToolbox::useTool( string name, InfoSet opts ) {
 
 	// Give results
 	return results;
+}
+
+void PredictiveCodingToolbox::list() {
+	cout << "Available tools:" << endl;
+
+	for( vector<Tool*>::iterator it = tools.begin();
+		 it != tools.end();
+		 ++it ) {
+		Tool* tp = (*it);
+
+		cout << "  " + tp->getName() + "\t" + tp->getDescription() << endl;
+		cout << "    " + tp->getUsage() << endl;
+	}
+}
+
+void PredictiveCodingToolbox::help() {
+	cout << "Possible commands:" << endl
+		 << "\tabout\tinformation about this toolbox" << endl
+		 << "\thelp \tthis help information" << endl
+		 << "\tlist \tlist all available tools" << endl;
+}
+
+void PredictiveCodingToolbox::about() {
+	cout << "Predictive Coding Toolbox by Dennis Merkus (dennis.merkus@gmail.com)" << endl
+	     << "This toolbox uses the SMILE library (provided on an \"as is\" basis). Available at http://genie.sis.pitt.edu/" << endl;
 }
 
 }
