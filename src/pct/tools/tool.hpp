@@ -10,21 +10,29 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
 
 #include "../infoset.hpp"
 
 using std::vector;
 using std::string;
+using std::tuple;
 
 namespace pct {
 
+typedef tuple<string, Info::Type> Option;
+typedef vector<Option> OptionList;
+
 class Tool {
+private:
+	string makeOptionUsage( string name, Info::Type type );
+
 protected:
 	string name;
 	string description;
 
-	vector<string> required;
-	vector<string> optional;
+	OptionList required;
+	OptionList optional;
 
 public:
 	virtual InfoSet run( InfoSet options ) = 0;
