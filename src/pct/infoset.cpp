@@ -49,16 +49,11 @@ bool InfoSet::isSet( string name ) {
 }
 
 Info InfoSet::getInfo( string name ) {
-	if( last->getName() == name ) {
+	if( this->contains(name) ) {
 		return *last;
 	}
 	else {
-		if( this->contains(name) ) {
-			return *last;
-		}
-		else {
-			// throw exception
-		}
+		std::cout << "Info '" << name << "' was not found." << std::endl;
 	}
 }
 

@@ -25,6 +25,8 @@ public:
 	virtual void addDependency( string from, string to ) = 0;
 
 	virtual void writeFile( string name, FileFormat format ) = 0;
+
+	virtual void update() = 0;
 };
 
 class SMILEBayesianNetwork : public BayesianNetwork {
@@ -38,7 +40,9 @@ public:
 
 	virtual void addNode( string name, vector<string> values );
 	virtual void addDependency( string from, string to );
-	virtual void writeFile( string name, FileFormat format );
+	virtual void writeFile( string name, FileFormat format = DSL );
+
+	virtual void update();
 };
 
 }

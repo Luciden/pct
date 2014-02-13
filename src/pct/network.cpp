@@ -61,4 +61,8 @@ void SMILEBayesianNetwork::writeFile( string name, FileFormat format ) {
 	}
 }
 
+void SMILEBayesianNetwork::update() {
+	net.UpdateBeliefs();
+}
+
 }
