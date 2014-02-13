@@ -15,6 +15,7 @@ using std::endl;
 
 #include "tools/tool.hpp"
 #include "tools/inferencetool.hpp"
+#include "tools/analysistool.hpp"
 
 namespace pct {
 
@@ -22,6 +23,7 @@ PredictiveCodingToolbox::PredictiveCodingToolbox() {
 	tools = vector<Tool*>();
 
 	tools.push_back( new InferenceTool() );
+	tools.push_back( new AnalysisTool() );
 }
 
 void PredictiveCodingToolbox::run( string command, InfoSet options ) {
@@ -116,8 +118,8 @@ void PredictiveCodingToolbox::list() {
 		 ++it ) {
 		Tool* tp = (*it);
 
-		cout << "  " + tp->getName() + "\t" + tp->getDescription() << endl;
-		cout << "    " + tp->getUsage() << endl;
+		cout << endl << "\t" + tp->getName() + "\t" + tp->getDescription() << endl;
+		cout << "Usage:\t" + tp->getUsage() << endl;
 	}
 }
 

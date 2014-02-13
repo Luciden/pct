@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+using std::cout;
+using std::endl;
+
 namespace pct {
 
 string Tool::getName() {
@@ -65,6 +68,11 @@ string Tool::getUsage() {
 	}
 
 	return usage;
+}
+
+void Tool::incorrectUsage() {
+	cout << "Some required options are not specified" << endl;
+	cout << "\t" << getUsage() << endl;
 }
 
 }

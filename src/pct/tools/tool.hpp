@@ -44,6 +44,8 @@ public:
 	string getDescription();
 
 	string getUsage();
+
+	void incorrectUsage();
 };
 
 }

@@ -65,8 +65,7 @@ InfoSet InferenceTool::run( InfoSet options ) {
 		cout << "Wrote the result to 'updated.xdsl'" << endl;
 	}
 	else {
-		std::cout << "Some required options are not specified" << std::endl;
-		std::cout << getUsage() << std::endl;
+		incorrectUsage();
 	}
 
 	return results;
