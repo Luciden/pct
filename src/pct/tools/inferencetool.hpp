@@ -34,9 +34,8 @@ private:
 
 	};
 
-   /**
-	* Parses a probability query.
-	*
+   /** @page query Querying Probabilities
+    *
 	* The (simplified) BNF grammar for the queries is as follows:
 	*
 	* Query       := 'P(' Conditional ')'
@@ -45,6 +44,9 @@ private:
 	* Variables   := Variable | Variable ',' Variables
 	* Variable    := {any valid node name}
 	* Value       := {any valid value identifier}
+	*/
+   /**
+	* Parses a probability query.
 	*/
 	void parseQuery( string query );
 

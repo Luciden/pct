@@ -36,6 +36,13 @@ protected:
 
 	bool checkOptions( InfoSet options );
 
+	void display( string msg, bool verbose );
+
+	/**
+	 * Writes a result to the specified file.
+	 */
+	void outputResult( string file, string result );
+
 public:
 	virtual InfoSet run( InfoSet options ) = 0;
 

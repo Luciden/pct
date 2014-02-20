@@ -21,26 +21,28 @@ InferenceTool::InferenceTool() {
 	required = OptionList();
 	optional = OptionList();
 
-	required.push_back( Option( "filename", Info::String ) );
+	required.push_back( Option( "infile", Info::String ) );
+	required.push_back( Option( "outfile", Info::String ) );
 	//required.push_back( Option( "query", Info::String ) );
 	//required.push_back( Option( "algorithm", Info::String ) );
+
+	optional.push_back( Option( "samples", Info::Integer ) );
 }
 
 InfoSet InferenceTool::run( InfoSet options ) {
 	InfoSet results = InfoSet();
+	bool verbose = options.isSet("verbose");
 
-	std::cout << "Checking options..." << std::endl;
+	display("Checking options...", verbose );
 	if( checkOptions( options ) ) {
-		cout << "Options O.K." << endl;
+		display("Options O.K.", verbose);
 
 		// Load a network from a file
-		cout << "Loading network..." << endl;
+		string infileName = options.getInfo("infile").getStringValue();
+		display("Loading network from file \"" + infileName + "\"...", verbose);
 
-		Info fileInfo = options.getInfo("filename");
-		string fileName = fileInfo.getStringValue();
-
-		SMILEBayesianNetwork network = FileInputModule::load( fileName );
-		cout << "Loading O.K." << endl;
+		SMILEBayesianNetwork network = FileInputModule::load( infileName );
+		display("Loading O.K.", verbose);
 
 		// Run inference algorithm
 		/*
@@ -49,20 +51,21 @@ InfoSet InferenceTool::run( InfoSet options ) {
 		cout << "Query parsed and network prepared." << endl;
 		*/
 		/*
-		cout << "Initializing algorithm..." << endl;
+		string algorithmName = options.getInfo("algorithm").getStringValue();
+		display("Initializing algorithm \"" + algorithmName + "\ ...", verbose);
 
-		cout << "Algorithm initialized." << endl;
+		display("Algorithm initialized!", verbose);
 		*/
 
-		cout << "Performing inference" << endl;
-		for( int i = 0; i < 100; i++ ) {
-			network.update();
-		}
-		cout << "Inference complete." << endl;
+		display("Performing inference", verbose);
+
+		network.update();
+		display("Inference complete.", verbose);
 
 		// Give results
-		network.writeFile( "updated.xdsl" );
-		cout << "Wrote the result to 'updated.xdsl'" << endl;
+		string outfileName = options.getInfo("outfile").getStringValue();
+		network.writeFile( outfileName );
+		display("Wrote resulting network to\"" + outfileName + "\"!", verbose);
 	}
 	else {
 		incorrectUsage();

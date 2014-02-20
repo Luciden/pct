@@ -11,7 +11,6 @@ using std::endl;
 namespace pct {
 
 SMILEBayesianNetwork FileInputModule::load( string name ) {
-	cout << "Loading file " << name << endl;
 	DSL_network net;
 
 	net.ReadFile( name.c_str() );

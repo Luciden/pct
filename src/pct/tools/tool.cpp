@@ -1,6 +1,7 @@
 #include "tool.hpp"
 
 #include <iostream>
+#include <fstream>
 
 using std::cout;
 using std::endl;
@@ -24,6 +25,20 @@ bool Tool::checkOptions( InfoSet options ) {
 	}
 
 	return true;
+}
+
+void Tool::display( string msg, bool verbose ) {
+	if( verbose ) {
+		cout << msg << endl;
+	}
+}
+
+void Tool::outputResult( string file, string result ) {
+	std::ofstream filestr;
+
+	filestr.open(file);
+	filestr << result;
+	filestr.close();
 }
 
 string Tool::makeOptionUsage( string optName, Info::Type optType ) {

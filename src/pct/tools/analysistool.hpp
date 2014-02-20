@@ -11,6 +11,8 @@ using std::string;
 
 namespace pct {
 
+typedef unsigned long long timestamp_t;
+
 class AnalysisTool : public Tool {
 public:
 	AnalysisTool();

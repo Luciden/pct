@@ -62,8 +62,14 @@ InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 				break;
 			}
 			else {
-				prevName = p.substr(1);
-				readName = true;
+				// Check for another '-' (flag), otherwise parse as an option name
+				if( p[1] == '-' ) {
+					opts.setFlag( p.substr(2) );
+				}
+				else {
+					prevName = p.substr(1);
+					readName = true;
+				}
 			}
 		}
 		else {
@@ -94,7 +100,9 @@ InfoSet PredictiveCodingToolbox::parseCommand( int argc, char* argv[] ) {
 }
 
 InfoSet PredictiveCodingToolbox::useTool( string name, InfoSet opts ) {
-	cout << opts.display() << endl;
+	if( opts.isSet("debug") ) {
+		cout << opts.display() << endl;
+	}
 
 	// Check if tool exists and run it
 	for( vector<Tool*>::iterator it = tools.begin();
