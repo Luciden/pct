@@ -72,33 +72,6 @@ InfoSet InferenceTool::run( InfoSet options ) {
 	return results;
 }
 
-void InferenceTool::parseQuery( string query ) {
-	// find the queried nodes/variables
-	vector<string> queried;
-	// find the specified variables
-	tuple<string, string> conditions;
-
-	vector<Token> tokens = tokenizeQuery( query );
-
-	ParseState s = Start;
-
-	for( vector<Token>::iterator it = tokens.begin();
-		 it != tokens.end();
-		 ++it ) {
-		switch(s) {
-		case Start:
-		
-			break;
-		}
-	}
-}
-
-vector<InferenceTool::Token> InferenceTool::tokenizeQuery( string query ) {
-	vector<InferenceTool::Token> tokens = vector<InferenceTool::Token>();
-
-	return tokens;
-}
-
 string InferenceTool::getOptionHelp( string name ) {
 	cout << "getting help for " << name << endl;
 	if( name == "algorithm" ) {

@@ -68,7 +68,7 @@ InfoSet AnalysisTool::run( InfoSet options ) {
 
 
 		// Give results
-		outputResult( options.getInfo("timefile").getStringValue(), std::to_string((long double)(T_end - T_start)) );
+		outputResult( options.getInfo("timefile").getStringValue(), std::to_string((long double)(T_end - T_start) / CLOCKS_PER_SEC) );
 		outputResult( options.getInfo("divergencefile").getStringValue(), std::to_string((long double)0.0f));
 	}
 	else {
