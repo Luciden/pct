@@ -24,8 +24,11 @@ public:
 
 	virtual void addDependency( string from, string to ) = 0;
 
-	virtual void writeFile( string name, FileFormat format ) = 0;
+	virtual void writeFile( string name, FileFormat format = DSL ) = 0;
 
+	static string displayPossibleAlgorithms();
+
+	virtual void setAlgorithm( string name ) = 0;
 	virtual void update() = 0;
 };
 
@@ -40,8 +43,9 @@ public:
 
 	virtual void addNode( string name, vector<string> values );
 	virtual void addDependency( string from, string to );
-	virtual void writeFile( string name, FileFormat format = DSL );
+	virtual void writeFile( string name, FileFormat format );
 
+	virtual void setAlgorithm( string name );
 	virtual void update();
 };
 

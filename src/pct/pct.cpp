@@ -26,17 +26,57 @@ PredictiveCodingToolbox::PredictiveCodingToolbox() {
 	tools.push_back( new AnalysisTool() );
 }
 
-void PredictiveCodingToolbox::run( string command, InfoSet options ) {
+bool PredictiveCodingToolbox::hasTool( string name ) {
+	for( vector<Tool*>::iterator it = tools.begin();
+		 it != tools.end();
+		 ++it )
+	{
+		if( (*it)->getName() == name )
+			return true;
+	}
+
+	return false;
+}
+
+Tool* PredictiveCodingToolbox::fetchTool( string name ) {
+	for( vector<Tool*>::iterator it = tools.begin();
+		 it != tools.end();
+		 ++it )
+	{
+		if( (*it)->getName() == name )
+			return (*it);
+	}
+}
+
+void PredictiveCodingToolbox::run( string command, int argc, char* argv[] ) {
+	//First check the command
+	//Dependent on it, parse the rest relatively
 	if( command == "about" ) {
 		about();
 	}
 	else if( command == "help" ) {
-		help();
+		if( argc == 4 ) {
+			// Help about tool's option
+			string toolName = argv[2];
+			string optionName = argv[3];
+
+			if( hasTool(toolName) ) {
+				Tool* tool = fetchTool(toolName);
+				cout << tool->getOptionHelp(optionName) << endl;
+			}
+			else {
+				cout << "tool was not found" << endl;
+			}
+		}
+		else {
+			help();
+		}
 	}
 	else if( command == "list" ) {
 		list();
 	}
 	else {
+		InfoSet options = parseCommand( argc, argv );
 		useTool( command, options );
 	}
 }
@@ -133,9 +173,10 @@ void PredictiveCodingToolbox::list() {
 
 void PredictiveCodingToolbox::help() {
 	cout << "Possible commands:" << endl
-		 << "\tabout\tinformation about this toolbox" << endl
-		 << "\thelp \tthis help information" << endl
-		 << "\tlist \tlist all available tools" << endl;
+		 << "\t'about'\tinformation about this toolbox" << endl
+		 << "\t'help' \tthis help information" << endl
+		 << "\t'help [toolname] [optionname]'\tget help about the tool's option" << endl
+		 << "\t'list' \tlist all available tools" << endl;
 }
 
 void PredictiveCodingToolbox::about() {

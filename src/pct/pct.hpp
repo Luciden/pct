@@ -23,6 +23,9 @@ class PredictiveCodingToolbox {
 private:
 	vector<Tool*> tools;
 
+	bool hasTool( string name );
+	Tool* fetchTool( string name );
+
 public:
 	/**
 	 * Initializes all tools for use.
@@ -34,7 +37,7 @@ public:
 	/**
 	 * Executes the toolbox.
 	 */
-	void run( string command, InfoSet options );
+	void run( string command, int argc, char* argv[] );
 
 	/**
 	 * Takes the command line arguments and parses them for use with the

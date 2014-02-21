@@ -56,6 +56,8 @@ public:
 	InferenceTool();
 
 	virtual InfoSet run( InfoSet options );
+
+	virtual string getOptionHelp( string name );
 };
 
 }

@@ -23,8 +23,8 @@ InferenceTool::InferenceTool() {
 
 	required.push_back( Option( "infile", Info::String ) );
 	required.push_back( Option( "outfile", Info::String ) );
+	required.push_back( Option( "algorithm", Info::String ) );
 	//required.push_back( Option( "query", Info::String ) );
-	//required.push_back( Option( "algorithm", Info::String ) );
 
 	optional.push_back( Option( "samples", Info::Integer ) );
 }
@@ -50,21 +50,19 @@ InfoSet InferenceTool::run( InfoSet options ) {
 
 		cout << "Query parsed and network prepared." << endl;
 		*/
-		/*
-		string algorithmName = options.getInfo("algorithm").getStringValue();
-		display("Initializing algorithm \"" + algorithmName + "\ ...", verbose);
 
+		string algorithmName = options.getInfo("algorithm").getStringValue();
+		display("Initializing algorithm \"" + algorithmName + "\" ...", verbose);
+		network.setAlgorithm(algorithmName);
 		display("Algorithm initialized!", verbose);
-		*/
 
 		display("Performing inference", verbose);
-
 		network.update();
 		display("Inference complete.", verbose);
 
 		// Give results
 		string outfileName = options.getInfo("outfile").getStringValue();
-		network.writeFile( outfileName );
+		network.writeFile( outfileName, DSL );
 		display("Wrote resulting network to\"" + outfileName + "\"!", verbose);
 	}
 	else {
@@ -99,6 +97,16 @@ vector<InferenceTool::Token> InferenceTool::tokenizeQuery( string query ) {
 	vector<InferenceTool::Token> tokens = vector<InferenceTool::Token>();
 
 	return tokens;
+}
+
+string InferenceTool::getOptionHelp( string name ) {
+	cout << "getting help for " << name << endl;
+	if( name == "algorithm" ) {
+		return SMILEBayesianNetwork::displayPossibleAlgorithms();
+	}
+	else {
+		return "No help.";
+	}
 }
 
 }

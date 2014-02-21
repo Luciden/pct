@@ -53,6 +53,8 @@ public:
 	string getUsage();
 
 	void incorrectUsage();
+
+	virtual string getOptionHelp( string name ) = 0;
 };
 
 }

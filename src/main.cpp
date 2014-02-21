@@ -26,7 +26,7 @@ int main( int argc, char *argv[] ) {
 			 << "For a list of possible commands and their options, type 'pct help'" << endl;
 	}
 	else {
-		toolbox.run( argv[1], toolbox.parseCommand( argc, argv ) );
+		toolbox.run( argv[1], argc, argv );
 	}
 
 	return 0;

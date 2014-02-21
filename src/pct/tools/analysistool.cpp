@@ -78,4 +78,8 @@ InfoSet AnalysisTool::run( InfoSet options ) {
 	return results;
 }
 
+string AnalysisTool::getOptionHelp( string name ) {
+	return "No help.";
+}
+
 }
