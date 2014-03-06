@@ -13,6 +13,9 @@ namespace pct {
 
 typedef unsigned long long timestamp_t;
 
+/** @addtogroup tools
+ * This is another test.
+ */
 class AnalysisTool : public Tool {
 public:
 	AnalysisTool();

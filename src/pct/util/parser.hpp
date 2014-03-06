@@ -32,6 +32,7 @@ private:
 *
 * The (simplified) BNF grammar for the queries is as follows:
 *
+* \verbatim
 * Query       := 'P(' Conditional ')'
 * Conditional := Terms '|' Terms | Terms
 * Terms       := Term ',' Terms | Term
@@ -40,6 +41,7 @@ private:
 *
 * Variable    := {any valid node name}
 * Value       := {any valid value identifier}
+* \endverbatim
 */
 /**
  * Implements the probability parser for the specified grammar.
@@ -67,6 +69,9 @@ private:
 		string identifier;
 	};
 
+	/** @see query
+	 *
+	 */
 	Query parse( string query );
 
    /**
