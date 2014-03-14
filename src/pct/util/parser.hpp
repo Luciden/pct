@@ -4,46 +4,24 @@
 #include <string>
 #include <vector>
 
+#include "variable.hpp"
+#include "token.hpp"
+#include "query.hpp"
+
 using std::vector;
 using std::string;
 
 namespace pct {
-
-class Variable {
-public:
-	string name;
-	bool instantiated;
-	string instance;
-
-	Variable( string name_ )
-		: name(name_), instantiated(false), instance("") {}
-
-	Variable( string name_, string instance_ )
-		: name(name_), instantiated(true), instance(instance_) {}
-};
-
-typedef vector<Variable> Variables;
-
-class Query {
-private:
-	vector<Variable> priors;
-	vector<Variable> observed;
-
-public:
-	vector<Variable> getPriors();
-	vector<Variable> getObserved();
-};
 
 /** @page query Querying Probabilities
 *
 * The (simplified) BNF grammar for the queries is as follows:
 *
 * \verbatim
-* Query       := 'P(' Conditional ')'
-* Conditional := Terms '|' Terms | Terms
+* Query       := 'P(' Body ')'
+* Body        := Terms '|' Terms | Terms
 * Terms       := Term ',' Terms | Term
-* Term        := Constraint | Variable
-* Constraint  := Variable '=' Value
+* Term        := Variable '=' Value | Variable
 *
 * Variable    := {any valid node name}
 * Value       := {any valid value identifier}
@@ -54,43 +32,39 @@ public:
  */
 class Parser {
 private:
-	class Token {
-	public:
-		enum Type {
-			LeftBracket,
-			RightBracket,
-			Equals,
-			Comma,
-			Pipe,
-			Name
-		};
+	vector<Token> tokens;
+	int index;
+	Token tok;
 
-		Token( Type t )
-			: type(t), identifier("") {}
-
-		Token( Type t, string id )
-			: type(t), identifier(id) {}
-
-		Type type;
-		string identifier;
-	};
-
-	/** @see query
-	 *
-	 */
-	Query parse( string query );
+	bool parsingLeft;
 
    /**
 	* Parses a probability query.
 	*/
-	Query parseQuery( string query );
-	Query parseConditional( string query );
+	Query* parseQuery( Query* q );
+	Query* parseBody( Query* q );
+	Query* parseTerms( Query* q );
+	Query* parseTerm( Query* q );
+	Query* parseConstraint( Query* q );
 
+	void nextToken();
+
+	/**
+	 * Makes sure the string that was built up so far is cleared,
+	 * so that a new identifier can take its place.
+	 */
 	void clearToken( string& token, vector<Token>* tokens );
 
 	void parseError( string expected );
 
-	vector<Token> tokenizeQuery( string query );
+	void tokenizeQuery( string query );
+
+public:
+	Parser();
+	
+    /** @see query
+	 */
+	Query parse( string query );
 };
 
 }

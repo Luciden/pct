@@ -22,9 +22,8 @@ InferenceTool::InferenceTool() {
 	optional = OptionList();
 
 	required.push_back( Option( "infile", Info::String ) );
-	required.push_back( Option( "outfile", Info::String ) );
 	required.push_back( Option( "algorithm", Info::String ) );
-	//required.push_back( Option( "query", Info::String ) );
+	required.push_back( Option( "query", Info::String ) );
 
 	optional.push_back( Option( "samples", Info::Integer ) );
 }
@@ -45,25 +44,20 @@ InfoSet InferenceTool::run( InfoSet options ) {
 		display("Loading O.K.", verbose);
 
 		// Run inference algorithm
-		/*
-		cout << "Parsing query..." << endl;
+		display("Parsing query...", verbose);
+		Parser parser = Parser();
 
-		cout << "Query parsed and network prepared." << endl;
-		*/
-
+		Query query = parser.parse( options.getInfo("query").getStringValue() );
+		display("Query parsed and network prepared.", verbose);
+		
 		string algorithmName = options.getInfo("algorithm").getStringValue();
 		display("Initializing algorithm \"" + algorithmName + "\" ...", verbose);
 		network.setAlgorithm(algorithmName);
 		display("Algorithm initialized!", verbose);
 
 		display("Performing inference", verbose);
-		network.update();
+		network.calculateDistribution( query );
 		display("Inference complete.", verbose);
-
-		// Give results
-		string outfileName = options.getInfo("outfile").getStringValue();
-		network.writeFile( outfileName, DSL );
-		display("Wrote resulting network to\"" + outfileName + "\"!", verbose);
 	}
 	else {
 		incorrectUsage();
