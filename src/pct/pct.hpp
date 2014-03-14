@@ -12,7 +12,15 @@
 
 using std::string;
 
+/**
+ * Contains everything that is part of the Predictive Coding Toolbox.
+ */
 namespace pct {
+
+/**
+ * Contains the parts that the Toolbox was specifically made for.
+ */
+namespace pc {}
 
 /** Main class for the Predictive Coding Toolbox.
  *

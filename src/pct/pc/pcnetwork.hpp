@@ -22,6 +22,9 @@ private:
 	vector<string> predictions;
 
 public:
+	PCNetwork( string name );
+	PCNetwork( string name, BayesianNetwork* net );
+
 	void setHypothesis( string name );
 	void setPrediction( string name );
 
