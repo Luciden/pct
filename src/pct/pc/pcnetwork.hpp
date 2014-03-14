@@ -33,6 +33,12 @@ public:
 	bool isHypothesis( string name );
 	bool isPrediction( string name );
 
+	vector<string> getHypotheses();
+	vector<string> getPredictions();
+
+	vector<string> getHypothesisValues( string name );
+	vector<string> getPredictionValues( string name );
+
 	/**
 	 * Receive the name that this part of the network has.
 	 *

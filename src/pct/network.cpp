@@ -185,7 +185,7 @@ void SMILEBayesianNetwork::calculateDistribution( Query query ) {
 
 			result += '\n';
 
-			int size = names->GetSize();
+			int size = names->NumItems();
 
 			for( int i = 0; i < size; i++ ) {
 				coords[0] = i;
@@ -249,6 +249,21 @@ void SMILEBayesianNetwork::calculateDistribution( Query query ) {
 
 bool SMILEBayesianNetwork::nodeExists( string name ) {
 	return !( net.FindNode( name.c_str() ) == DSL_OUT_OF_RANGE );
+}
+
+vector<string> SMILEBayesianNetwork::getNodeValues( string name ) {
+	vector<string> values = vector<string>();
+
+	int node = net.FindNode( name.c_str() );
+
+	DSL_idArray* names;
+	names = net.GetNode(node)->Definition()->GetOutcomesNames();
+
+	for( int i = 0; i < names->NumItems(); i++ ) {
+		values.push_back( (*names)[i] );
+	}
+
+	return values;
 }
 
 }

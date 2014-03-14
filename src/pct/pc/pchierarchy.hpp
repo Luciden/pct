@@ -15,16 +15,24 @@ namespace pct {
 namespace pc {
 
 typedef tuple<string, string> Link;
+typedef tuple<string, vector<Link>> Linkage;
 
 class PCHierarchy {
 private:
 	vector<PCNetwork*> networks;
 
+	bool doLineUp( vector<string> hyps, vector<Link> links );
+
 public:
+	/**
+	 * Creates an empty hierarchy.
+	 */
+	PCHierarchy();
+
 	/**
 	 * Adds a parentless network to the hierarchy.
 	 */
-	void addNetwork( PCNetwork net );
+	void addNetwork( PCNetwork* net );
 
 	/**
 	 * Connects a network to an existing network in the hierarchy.
@@ -39,13 +47,19 @@ public:
 	 * If these conditions are met, then the new network is linked to the
 	 * parent in the hierarchy and the linked nodes are considered as one.
 	 *
+	 * This particular implementation considers the networks that make up
+	 * the hierarchy as individual networks, as opposed to a single
+	 * connected network.
+	 *
 	 * @param parent name of the parent network to connect this to.
 	 * @param links this specifies which of the parent network's prediction
 	 *        are linked to which of the hypotheses in the new network.
 	 */
-	void addNetwork( PCNetwork net, string parent, vector<Link> links );
+	void addNetwork( PCNetwork* net, string parent, vector<Link> links );
 
 	void performInference( Query query );
+
+	bool hasNetwork( string name );
 };
 
 }

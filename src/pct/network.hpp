@@ -36,6 +36,8 @@ public:
 	virtual void calculateDistribution( Query query ) =0;
 
 	virtual bool nodeExists( string name ) =0;
+	
+	virtual vector<string> getNodeValues( string name ) =0;
 };
 
 class SMILEBayesianNetwork : public BayesianNetwork {
@@ -57,6 +59,8 @@ public:
 	virtual void calculateDistribution( Query query );
 
 	virtual bool nodeExists( string name );
+
+	virtual vector<string> getNodeValues( string name );
 };
 
 }
