@@ -34,6 +34,8 @@ public:
 	virtual void update() = 0;
 
 	virtual void calculateDistribution( Query query ) =0;
+
+	virtual bool nodeExists( string name ) =0;
 };
 
 class SMILEBayesianNetwork : public BayesianNetwork {
@@ -53,6 +55,8 @@ public:
 	virtual void update();
 
 	virtual void calculateDistribution( Query query );
+
+	virtual bool nodeExists( string name );
 };
 
 }

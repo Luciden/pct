@@ -247,4 +247,8 @@ void SMILEBayesianNetwork::calculateDistribution( Query query ) {
 	}
 }
 
+bool SMILEBayesianNetwork::nodeExists( string name ) {
+	return !( net.FindNode( name.c_str() ) == DSL_OUT_OF_RANGE );
+}
+
 }
