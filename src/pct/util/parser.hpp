@@ -22,10 +22,16 @@ public:
 		: name(name_), instantiated(true), instance(instance_) {}
 };
 
+typedef vector<Variable> Variables;
+
 class Query {
 private:
 	vector<Variable> priors;
 	vector<Variable> observed;
+
+public:
+	vector<Variable> getPriors();
+	vector<Variable> getObserved();
 };
 
 /** @page query Querying Probabilities

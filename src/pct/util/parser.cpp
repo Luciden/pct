@@ -9,6 +9,14 @@ using std::tuple;
 
 namespace pct {
 
+Variables Query::getObserved() {
+	return observed;
+}
+
+Variables Query::getPriors() {
+	return priors;
+}
+
 Query Parser::parse( string query ) {
 	// find the queried nodes/variables
 	Query q = Query();

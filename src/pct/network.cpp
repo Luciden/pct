@@ -7,8 +7,13 @@
 #include "network.hpp"
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 #include "smile.h"
+
+#include "util\parser.hpp"
 
 using std::cout;
 using std::endl;
@@ -130,6 +135,117 @@ void SMILEBayesianNetwork::setAlgorithm( string name ) {
 
 void SMILEBayesianNetwork::update() {
 	net.UpdateBeliefs();
+}
+
+void SMILEBayesianNetwork::calculateDistribution( Query query ) {
+	// Differentiate cases
+	Variables priors = query.getPriors();
+	Variables observed = query.getObserved();
+
+	// 1. Only observed
+	if( observed.size() == 1 && priors.size() == 0 ) {
+		// 1a. Particular observed
+		if( observed.at(0).instantiated ) {
+			// TODO: add check for correct node/name here
+			int node = net.FindNode( observed.at(0).name.c_str() );
+
+			DSL_sysCoordinates coords(*net.GetNode(node)->Value());
+		
+			DSL_idArray* names;
+			names = net.GetNode(node)->Definition()->GetOutcomesNames();
+
+			int index = names->FindPosition( observed.at(0).instance.c_str() );
+			coords[0] = index;
+			coords.GoToCurrentPosition();
+
+			double value = coords.UncheckedValue();
+			std::ostringstream os;
+			os << value;
+
+			string result = observed.at(0).name + " " + observed.at(0).instance + '\n'
+				+ os.str();
+
+			std::ofstream file;
+			file.open("result.txt");
+			file << result;
+			file.close();
+		}
+		// 1b. Uninstantiated observed
+		// i.e. get the whole probability distribution over the node
+		else {
+			string result = "";
+
+			int node = net.FindNode( observed.at(0).name.c_str() );
+
+			result += observed.at(0).name;
+
+			DSL_sysCoordinates coords(*net.GetNode(node)->Value());
+		
+			DSL_idArray* names;
+			names = net.GetNode(node)->Definition()->GetOutcomesNames();
+
+			result += '\n';
+
+			int size = names->GetSize();
+
+			for( int i = 0; i < size; i++ ) {
+				coords[0] = i;
+				coords.GoToCurrentPosition();
+
+				double value = coords.UncheckedValue();
+				std::ostringstream os;
+				os << value;
+
+				result += os.str() + ' ';
+			}
+
+			std::ofstream file;
+			file.open("result.txt");
+			file << result;
+			file.close();
+		}
+	}
+	// 2. Also priors
+	else {
+		// Set all the evidence
+		for( Variables::iterator it = priors.begin();
+			 it != priors.end();
+			 ++it ) {
+			int node = net.FindNode( it->name.c_str() );
+
+			DSL_idArray* names;
+			names = net.GetNode(node)->Definition()->GetOutcomesNames();
+
+			int pos = names->FindPosition( it->instance.c_str() );
+
+			// Set evidence
+			net.GetNode(node)->Value()->SetEvidence(pos);
+		}
+
+		// Now get the result value
+		int node = net.FindNode( observed.at(0).name.c_str() );
+
+		DSL_sysCoordinates coords(*net.GetNode(node)->Value());
+
+		DSL_idArray* names;
+		names = net.GetNode(node)->Definition()->GetOutcomesNames();
+
+		int index = names->FindPosition( observed.at(0).instance.c_str() );
+		coords[0] = index;
+		coords.GoToCurrentPosition();
+
+		double value = coords.UncheckedValue();
+		std::ostringstream os;
+		os << value;
+
+		string result = observed.at(0).name + " " + observed.at(0).instance + '\n'
+			+ os.str();
+
+		std::ofstream file;
+		file.open("result.txt");
+		file << result;
+		file.close();
+	}
 }
 
 }

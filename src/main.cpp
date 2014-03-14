@@ -12,10 +12,6 @@ using std::endl;
 
 using std::string;
 
-void description() {
-	
-}
-
 int main( int argc, char *argv[] ) {
 	PredictiveCodingToolbox toolbox = PredictiveCodingToolbox();
 

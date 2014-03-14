@@ -6,6 +6,8 @@
 #include <map>
 #include "smile.h"
 
+#include "util\parser.hpp"
+
 using std::string;
 using std::vector;
 using std::map;
@@ -20,16 +22,18 @@ enum FileFormat {
 class BayesianNetwork {
 private:
 public:
-	virtual void addNode( string name, vector<string> values ) = 0;
+	virtual void addNode( string name, vector<string> values ) =0;
 
-	virtual void addDependency( string from, string to ) = 0;
+	virtual void addDependency( string from, string to ) =0;
 
-	virtual void writeFile( string name, FileFormat format = DSL ) = 0;
+	virtual void writeFile( string name, FileFormat format = DSL ) =0;
 
 	static string displayPossibleAlgorithms();
 
-	virtual void setAlgorithm( string name ) = 0;
+	virtual void setAlgorithm( string name ) =0;
 	virtual void update() = 0;
+
+	virtual void calculateDistribution( Query query ) =0;
 };
 
 class SMILEBayesianNetwork : public BayesianNetwork {
@@ -47,6 +51,8 @@ public:
 
 	virtual void setAlgorithm( string name );
 	virtual void update();
+
+	virtual void calculateDistribution( Query query );
 };
 
 }
