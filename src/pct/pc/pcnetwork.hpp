@@ -33,8 +33,8 @@ public:
 	bool isHypothesis( string name );
 	bool isPrediction( string name );
 
-	vector<string> getHypotheses();
-	vector<string> getPredictions();
+	vector<string> getHypothesesNames();
+	vector<string> getPredictionsNames();
 
 	vector<string> getHypothesisValues( string name );
 	vector<string> getPredictionValues( string name );

@@ -40,11 +40,11 @@ bool PCNetwork::isPrediction( string name ) {
 	return std::find( predictions.begin(), predictions.end(), name ) != predictions.end();
 }
 
-vector<string> PCNetwork::getHypotheses() {
+vector<string> PCNetwork::getHypothesesNames() {
 	return hypotheses;
 }
 
-vector<string> PCNetwork::getPredictions() {
+vector<string> PCNetwork::getPredictionsNames() {
 	return predictions;
 }
 

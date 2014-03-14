@@ -4,6 +4,7 @@
 #include <tuple>
 #include <string>
 
+#include "linkage.hpp"
 #include "pcnetwork.hpp"
 #include "../util/parser.hpp"
 
@@ -14,14 +15,12 @@ namespace pct {
 
 namespace pc {
 
-typedef tuple<string, string> Link;
-typedef tuple<string, vector<Link>> Linkage;
-
 class PCHierarchy {
 private:
 	vector<PCNetwork*> networks;
+	vector<Linkage> links;
 
-	bool doLineUp( vector<string> hyps, vector<Link> links );
+	PCNetwork* getNetwork( string name );
 
 public:
 	/**
@@ -55,9 +54,9 @@ public:
 	 * @param links this specifies which of the parent network's prediction
 	 *        are linked to which of the hypotheses in the new network.
 	 */
-	void addNetwork( PCNetwork* net, string parent, vector<Link> links );
+	void addNetwork( PCNetwork* net, string parent, Linkage link );
 
-	void performInference( Query query );
+	// void performInference( Query query );
 
 	bool hasNetwork( string name );
 };

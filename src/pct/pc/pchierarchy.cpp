@@ -6,51 +6,49 @@ namespace pc {
 
 PCHierarchy::PCHierarchy() {
 	networks = vector<PCNetwork*>();
+	links = vector<Linkage>();
 }
 
-bool PCHierarchy::doLineUp( vector<string> hyps, vector<Link> links ) {
-	for( vector<string>::iterator it = hyps.begin();
-		 it != hyps.end();
+PCNetwork* PCHierarchy::getNetwork( string name ) {
+	for( vector<PCNetwork*>::iterator it = networks.begin();
+		 it != networks.end();
 		 ++it )
 	{
-		bool found = false;
-
-		for( vector<Link>::iterator itt = links.begin();
-			 !found && itt != links.end();
-			 ++itt )
-		{
-			if( *it == std::get<0>(*itt) ) {
-				found = true;
-			}
-		}
-
-		if( !found ) {
-			return false;
-		}
+		if( (*it)->getPCName() == name )
+			return (*it);
 	}
 
-	return true;
+	//TODO: error not found
 }
 
 void PCHierarchy::addNetwork( PCNetwork* net ) {
 	networks.push_back( net );
 }
 
-void PCHierarchy::addNetwork( PCNetwork* net, string parent, vector<Link> links ) {
+void PCHierarchy::addNetwork( PCNetwork* net, string parent, Linkage link ) {
 	// Check if parent exists
 	if( hasNetwork( parent ) ) {
-		// Check if new net's hypotheses line up with links and then with
-		// parent's predictions
-		vector<string> newHyps = net->getHypotheses();
-
-		if( doLineUp( newHyps, links ) ) {
+		
+		// Check if parent's predictions line up with child's hypotheses
+		if( link.checkPredictions( getNetwork( parent ) ) && link.checkHypotheses( net ) ) {
+			links.push_back( link );
 		}
-
-
 	}
 	else {
 		//TODO: error
 	}
+}
+
+bool PCHierarchy::hasNetwork( string name ) {
+	for( vector<PCNetwork*>::iterator it = networks.begin();
+		it != networks.end();
+		++it )
+	{
+		if( (*it)->getPCName() == name )
+			return true;
+	}
+
+	return false;
 }
 
 }
