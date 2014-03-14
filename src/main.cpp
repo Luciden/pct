@@ -12,6 +12,16 @@ using std::endl;
 
 using std::string;
 
+#ifdef RUNTESTS
+
+#include "test/test.hpp"
+
+int main( int argc, char *argv[] ) {
+	Test t = Test();
+
+	t.runTests();
+}
+#else
 int main( int argc, char *argv[] ) {
 	PredictiveCodingToolbox toolbox = PredictiveCodingToolbox();
 
@@ -26,4 +36,6 @@ int main( int argc, char *argv[] ) {
 	}
 
 	return 0;
+#endif
+
 }

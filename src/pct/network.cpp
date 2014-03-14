@@ -93,7 +93,6 @@ void SMILEBayesianNetwork::writeFile( string name, FileFormat format ) {
 }
 
 void SMILEBayesianNetwork::setAlgorithm( string name ) {
-	cout << "setting" << name << endl;
 	int alg;
     if(      name == "smile_lauritzen" ) {
 		alg = DSL_ALG_BN_LAURITZEN;
