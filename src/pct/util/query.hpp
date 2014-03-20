@@ -14,6 +14,11 @@ namespace pct {
 
 typedef vector<Variable> Variables;
 
+/**
+ * Represents a specification of what probability distribution to calculate.
+ *
+ * See @ref manual_query for more information on how these are used.
+ */
 class Query {
 private:
 	vector<Variable> priors;
@@ -22,7 +27,14 @@ private:
 public:
 	Query();
 
+	/**
+	 * Add a prior variable (with value)
+	 */
 	void addPrior( Variable p );
+
+	/**
+	 * Add a queried observed variable (with value)
+	 */
 	void addObserved( Variable v );
 
 	vector<Variable> getPriors();

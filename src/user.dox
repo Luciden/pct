@@ -2,8 +2,228 @@
 
 @section manual_intro Introduction
 
-@section manual_flow Information Flow
+The Predictive Coding Toolbox (PCT) provides tools to research Predictive Coding.
+This Toolbox was designed with integration in mind, hence the command-based interface.
+
+For a quick start, run "pct help" or go to the @ref manual_tools section.
+
+@section manual_interface User Interface
+
+The Predictive Coding Toolbox works with a command line interface.
+Commands have the following form:
+
+\verbatim
+pct command [options]
+\endverbatim
+
+or
+
+\verbatim
+pct toolname -option1 value -option2 "another value" -optionn value --flagx --flagy
+\endverbatim
+
+@subsection manual_interface_commands General Commands
+
+These commands are tool-independent.
+
+\verbatim
+pct about
+\endverbatim
+
+Displays some information regarding the PCT.
+
+\verbatim
+pct help
+\endverbatim
+
+Displays all general commands and their descriptions.
+
+\verbatim
+pct help [tool] [option]
+\endverbatim
+
+Displays help for the the specified tool's option, if there is any information
+available.
+An example of this is displaying the possible algorithms to use in a particular
+tool.
+
+\verbatim
+pct list
+\endverbatim
+
+Lists all available tools and related information such as their required and
+optional parameters.
+
+@subsection manual_interface_options Options
+
+An option is any piece of information that the tool uses to alter the result.
+These are specified by a dash, '-', followed by the option's name, which is
+then followed by the value.
+In the current version of the Toolbox, an option's value is either:
+
+ - a number (0, 1, 42, -1)
+ - a decimal number (0.0, 3.14159)
+ - or a string (hello, "hello world")
+
+Examples of a specified option with its value are:
+
+\verbatim
+-length 20
+-filename data.txt
+-angle 33.3
+-sentence "This is not a sentence."
+\endverbatim
+
+Since the command line options are parsed by the operating system, care should
+be taken in specifying longer strings.
+In Windows, strings with whitespace can be specified by surrounding them with
+double quotes: ".
+
+@subsection manual_interface_flags Flags
+
+Flags are settings that can be turned on.
+These are specified by two dashes '--' followed by the flag's name.
+
+Examples:
+
+\verbatim
+--debug
+--verbose
+\endverbatim
 
 @section manual_tools Tools
+
+In this version of the Toolbox, there are two tools available.
+
+@subsection manual_tools_inference Inference Tool
+
+This tool is used to calculate probability distributions in a network.
+
+@subsubsection manual_tools_inference_required Required Parameters
+
+Its required options:
+
+\verbatim
+-infile <string>
+\endverbatim
+
+specifies the file that contains the network to consider.
+The file's format will be recognized automatically.
+
+\verbatim
+-algorithm <string>
+\endverbatim
+
+specifies the algorithm to use to perform the inference by using the appropriate
+identifier.
+To find out which algorithms can be used, run "pct help inference algorithm"
+
+\verbatim
+-query <string>
+\endverbatim
+
+specifies which probability distribution to calculate.
+See @ref manual_query for more information.
+
+@subsubsection manual_tools_inference_optional Optional Parameters
+
+\verbatim
+-samples <int>
+\endverbatim
+
+specifies the number of samples to use, if the algorithm supports it.
+
+@subsubsection manual_tools_inference_flags Possible Flags
+
+\verbatim
+--verbose
+\endverbatim
+
+Displays extra information on what is being calculated.
+
+\verbatim
+--debug
+\endverbatim
+
+Displays debugging information, if available.
+
+@subsection manual_tools_inference_example Example Usage
+
+\verbatim
+pct inference -algorithm smile_lauritzen -infile network.xdsl -query P( X )
+\endverbatim
+
+
+@subsection manual_tools_analyze Analyze Tool
+
+@subsubsection manual_tools_analyze_required Required Parameters
+
+Its required options:
+
+\verbatim
+-infile <string>
+\endverbatim
+
+See the inference tool's @ref manual_tools_inference_required .
+
+\verbatim
+-algorithm <string>
+\endverbatim
+
+See the inference tool's @ref manual_tools_inference_required .
+
+\verbatim
+-timefile <string>
+\endverbatim
+
+specifies the file name of the time analysis result.
+
+\verbatim
+-divergencefile <string>
+\endverbatim
+
+specifies the file name of the divergence analysis result (NOT IMPLEMENTED).
+
+@subsubsection manual_tools_analyze_flags Possible Flags
+
+See @ref manual_tools_inference_flags .
+
+@subsection manual_tools_analyze_example Example Usage
+
+\verbatim
+pct analyze -algorithm smile_lauritzen -infile network.xdsl -timefile time.txt -divergencefile divergence.txt
+\endverbatim
+
+
+
+@section manual_query Queries
+
+This way of specifying which probability distributions is modeled after how
+probabilities are generally written down in probability theory.
+
+The (simplified) BNF grammar for the queries is as follows:
+
+\verbatim
+Query       := 'P(' Body ')'
+Body        := Terms '|' Terms | Terms
+Terms       := Term ',' Terms | Term
+Term        := Variable '=' Value | Variable
+
+Variable    := {any valid node name}
+Value       := {any valid value identifier}
+\endverbatim
+
+@subsection manual_query_examples Examples
+
+Some possible queries:
+
+\verbatim
+P( X )
+P( X | Y )
+P( X = x )
+P( X = x | Y )
+P( X | Y = y )
+P( Weather | Earthquake = yes )
+\endverbatim
 
 */

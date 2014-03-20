@@ -13,20 +13,6 @@ using std::string;
 
 namespace pct {
 
-/** @page query Querying Probabilities
-*
-* The (simplified) BNF grammar for the queries is as follows:
-*
-* \verbatim
-* Query       := 'P(' Body ')'
-* Body        := Terms '|' Terms | Terms
-* Terms       := Term ',' Terms | Term
-* Term        := Variable '=' Value | Variable
-*
-* Variable    := {any valid node name}
-* Value       := {any valid value identifier}
-* \endverbatim
-*/
 /**
  * Implements the probability parser for the specified grammar.
  */
@@ -47,6 +33,9 @@ private:
 	Query* parseTerm( Query* q );
 	Query* parseConstraint( Query* q );
 
+	/**
+	 * Sets the current token to the next available token.
+	 */
 	void nextToken();
 
 	/**
@@ -55,14 +44,26 @@ private:
 	 */
 	void clearToken( string& token, vector<Token>* tokens );
 
+	/**
+	 * Shows a parser error.
+	 */
 	void parseError( string expected );
 
+	/**
+	 * Produces a set of tokens from a query string.
+	 */
 	void tokenizeQuery( string query );
 
 public:
+	/**
+	 * Instantiates the current token et cetera.
+	 */
 	Parser();
 	
-    /** @see query
+    /**
+	 * Parses and evaluates a specified query.
+	 *
+	 * Also see @ref manual_query
 	 */
 	Query parse( string query );
 };

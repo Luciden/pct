@@ -9,6 +9,11 @@ using std::string;
 
 namespace pct {
 
+/**
+ * A token representation that is used to parse the Query.
+ *
+ * Some types have an associated name.
+ */
 class Token {
 public:
 	enum Type {

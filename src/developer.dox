@@ -2,4 +2,69 @@
 
 @section dev_tool Adding a New Tool
 
+To add a new tool, create a new class that implements the Tool interface,
+that implements the run() and getOptionHelp() functions and that provides
+its own constructor.
+
+\code{.cpp}
+class MyTool : public Tool {
+public:
+	MyTool();
+
+	virtual InfoSet run( InfoSet options );
+
+	virtual string getOptionHelp( string name );
+};
+\endcode
+
+In the constructor, provide the name, description and the required and optional
+parameters that this tool uses.
+
+\code{.cpp}
+MyTool::MyTool() {	
+	name = "tool";
+	description = "Does something.";
+
+	required = OptionList();
+	optional = OptionList();
+
+	required.push_back( Option( "option1", Info::String ) );
+	required.push_back( Option( "option2", Info::Double ) );
+	required.push_back( Option( "option3", Info::Integer ) );
+
+	optional.push_back( Option( "another", Info::String ) );
+}
+\endcode
+
+Implement the run() function.
+Use the checkOptions() function to check if all required options are set.
+
+\code{.cpp}
+InfoSet InferenceTool::run( InfoSet options ) {
+	InfoSet results = InfoSet();
+
+	if( checkOptions( options ) ) {
+        // ...
+	}
+	else {
+		incorrectUsage();
+	}
+
+	return results;
+}
+\endcode
+
+Finally, add the tool to the Toolbox by including it in the available tools
+in PredictiveCodingToolbox (pct.cpp).
+
+\code{.cpp}
+PredictiveCodingToolbox::PredictiveCodingToolbox() {
+	tools = vector<Tool*>();
+    
+    // ...
+    
+	tools.push_back( new MyTool() );
+}
+\endcode
+
 */

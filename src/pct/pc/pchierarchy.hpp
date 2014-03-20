@@ -15,6 +15,10 @@ namespace pct {
 
 namespace pc {
 
+/**
+ * A hierarchy that links several networks together into a larger
+ * network.
+ */
 class PCHierarchy {
 private:
 	vector<PCNetwork*> networks;
@@ -56,8 +60,9 @@ public:
 	 */
 	void addNetwork( PCNetwork* net, string parent, Linkage link );
 
-	// void performInference( Query query );
-
+	/**
+	 * See if the hierarchy contains a network with the specified name.
+	 */
 	bool hasNetwork( string name );
 };
 

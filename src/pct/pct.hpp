@@ -31,7 +31,14 @@ class PredictiveCodingToolbox {
 private:
 	vector<Tool*> tools;
 
+	/**
+	 * See whether the requested tool is registered and available.
+	 */
 	bool hasTool( string name );
+	
+	/**
+	 * Get the tool so it is ready to be used.
+	 */
 	Tool* fetchTool( string name );
 
 public:
@@ -53,6 +60,9 @@ public:
 	 */
 	InfoSet parseCommand( int argc, char* argv[] );
 
+	/**
+	 * Execute the tool with the specified options.
+	 */
 	InfoSet useTool( string name, InfoSet opts );
 
 	/**

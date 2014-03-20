@@ -7,8 +7,14 @@
 
 namespace pct {
 
+/**
+ * Provides file reading functionalities.
+ */
 class FileInputModule : public Module {
 public:
+	/**
+	 * Reads a Bayesian network using the SMILE library.
+	 */
 	static SMILEBayesianNetwork load( string name );
 };
 

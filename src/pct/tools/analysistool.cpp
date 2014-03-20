@@ -79,7 +79,13 @@ InfoSet AnalysisTool::run( InfoSet options ) {
 }
 
 string AnalysisTool::getOptionHelp( string name ) {
-	return "No help.";
+	cout << "getting help for " << name << endl;
+	if( name == "algorithm" ) {
+		return SMILEBayesianNetwork::displayPossibleAlgorithms();
+	}
+	else {
+		return "No help.";
+	}
 }
 
 }

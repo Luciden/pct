@@ -11,6 +11,9 @@ using std::string;
 
 namespace pct {
 
+/**
+ * Calculates probability distributions for a given network.
+ */
 class InferenceTool : public Tool {
 public:
 	InferenceTool();

@@ -13,8 +13,8 @@ namespace pct {
 
 typedef unsigned long long timestamp_t;
 
-/** @addtogroup tools
- * This is another test.
+/**
+ * Analyses algorithms during inference.
  */
 class AnalysisTool : public Tool {
 public:

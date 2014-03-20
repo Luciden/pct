@@ -3,6 +3,9 @@
 
 namespace pct {
 
+/**
+ * Some functions bundled for convenience.
+ */
 class Module {
 private:
 

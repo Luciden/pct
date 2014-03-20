@@ -3,13 +3,13 @@
 The Predictive Coding Toolbox, or PCT for short, is a set of tools that is designed to
 help with research on the Predictive Coding framework.
 
-@section sec_pages Pages
+@section sec_userman User Manual
 
-@li the @ref manual "User Manual"
-@li A @ref tools "list" of available tools and their uses
-@li Creating @ref query "queries" for inference
-@li Specifying @ref hierarchy "Predictive Coding Hierarchies" and performing @ref query
-    "inference" on them
+The @ref manual "User Manual" is available with examples.
+
+@section sec_devman Developer Manual
+
+The @ref developer "Developer Manual" for extending/altering the Toolbox.
 
 @section sec_license License
 

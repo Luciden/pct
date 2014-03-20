@@ -9,6 +9,9 @@ using std::string;
 
 namespace pct {
 
+/**
+ * One element in the Query parse tree that specifies a variable/value pair.
+ */
 class Variable {
 public:
 	string name;
