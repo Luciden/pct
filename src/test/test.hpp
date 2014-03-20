@@ -3,7 +3,8 @@
 
 class Test {
 private:
-
+	void testParser1();
+	void testParser2();
 public:
 	void runTests();
 };
